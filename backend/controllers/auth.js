@@ -66,13 +66,11 @@ exports.login = (req, res, next) => {
           res.status(200).json({
             userId: user.id,
             token: jwt.sign(
-              { userId: user.id, is_admin: user.is_admin },
-              process.env.SECRET_TOKEN,
-              {
-                expiresIn: '24h',
-              }
+              { userId: user.id, isAdmin: user.isAdmin },
+              process.env.JWT_SECRET_TOKEN,
+              {expiresIn: '24h',}
             ),
-            is_admin: user.is_admin,
+            isAdmin: user.is_admin,
             Message : `Bonjour ${user.pseudo} !`
           }
           );
