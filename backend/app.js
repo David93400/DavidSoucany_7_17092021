@@ -54,11 +54,13 @@ db.sequelize.sync();
 
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user')
+const postRoutes = require('./routes/post');
 
 // Routeurs
 
 app.use('/auth', authRoutes);
-app.use('/users', userRoutes)
+app.use('/users', userRoutes);
+app.use('/posts', postRoutes);
 
 
 // 

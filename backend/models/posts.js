@@ -23,16 +23,16 @@ module.exports = function(sequelize, DataTypes) {
     },
     attachment: {
       type: DataTypes.STRING(255),
-      allowNull: false
+      allowNull: true
     },
     likes: {
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 0
     },
-    updateAt: {
+    updatedAt: {
       type: DataTypes.DATE,
-      allowNull: false
+      allowNull: true
     }
   }, {
     sequelize,
