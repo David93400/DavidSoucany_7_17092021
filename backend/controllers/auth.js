@@ -1,8 +1,12 @@
 const models = require('../models');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
 
 const User = models.users;
+
+const maxAge = 3 * 24 * 60 * 60 * 1000
 
 const passwordValidator = require('password-validator');
 
@@ -22,13 +26,12 @@ passwordSchema
 
 
 
-exports.signup = (req, res, next) => {
+exports.signup = (req, res) => {
 
   if (!passwordSchema.validate(req.body.password)) {
+    res.status(401).send(`Le mot de passe doit faire entre 8 et 32 caractères, contenir 1 min, 1 maj, 2 chiffres et ne pas contenir d'espaces`,
+    );
     
-    res.status(401).json({
-      message: `Le mot de passe doit faire entre 8 et 32 caractères, contenir 1 min, 1 maj, 2 chiffres et ne pas contenir d'espaces`,
-    });
     return false;
   }
 
@@ -48,35 +51,43 @@ exports.signup = (req, res, next) => {
 };
 
 
-exports.login = (req, res, next) => {
+exports.login = (req, res) => {
   const email = req.body.email;
   User.findOne({
     where: { email },
   })
     .then((user) => {
       if (!user) {
-        return res.status(401).json({ error: `Utilisateur non trouvé !` });
+        return res.status(401).json({ err: `Utilisateur non trouvé !` });
       }
       bcrypt
         .compare(req.body.password, user.password) 
         .then((valid) => {
           if (!valid) {
-            return res.status(401).json({ error: `Mot de passe incorrect !` });
+            return res.status(401).json({ err: `Mot de passe incorrect !` });
           }
-          res.status(200).json({
-            userId: user.id,
-            token: jwt.sign(
+          res.cookie(
+            'jwt',
+            jwt.sign(
               { userId: user.id, isAdmin: user.isAdmin },
               process.env.JWT_SECRET_TOKEN,
-              {expiresIn: '24h',}
-            ),
-            isAdmin: user.is_admin,
-            Message : `Bonjour ${user.pseudo} !`
-          }
+              { expiresIn: maxAge },
+              { maxAge: maxAge, httpOnly: true }
+            )
           );
-          
+          res.status(200).json({
+            userId: user.id,
+            isAdmin: user.isAdmin,
+          }
+          );          
         })
-        .catch((error) => res.status(500).json({ error }));
+        .catch((err) => res.status(500).json({ err}));
     })
-    .catch((error) => res.status(500).json({ error }));
+    .catch((err) => res.status(500).json({ err }));
 };
+
+module.exports.logout = (req, res) => {
+  res.clearCookie('jwt');
+  res.redirect('/');
+};
+

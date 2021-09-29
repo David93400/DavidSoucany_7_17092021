@@ -1,6 +1,5 @@
 const db = require ('../models');
 const User = db.users;
-const identification = require('../middleware/auth');
 
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
