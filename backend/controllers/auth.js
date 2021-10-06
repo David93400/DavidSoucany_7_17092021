@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 
+
 const User = models.users;
 
 const maxAge = 3 * 24 * 60 * 60 * 1000
@@ -28,12 +29,12 @@ passwordSchema
 
 exports.signup = (req, res) => {
 
-  if (!passwordSchema.validate(req.body.password)) {
-    res.status(401).send(`Le mot de passe doit faire entre 8 et 32 caractères, contenir 1 min, 1 maj, 2 chiffres et ne pas contenir d'espaces`,
-    );
+  // if (!passwordSchema.validate(req.body.password)) {
+  //   res.status(401).send(`Le mot de passe doit faire entre 8 et 32 caractères, contenir 1 min, 1 maj, 2 chiffres et ne pas contenir d'espaces`,
+  //   );
     
-    return false;
-  }
+  //   return false;
+  // }
 
     bcrypt
       .hash(req.body.password, 10) 
@@ -74,12 +75,14 @@ exports.login = (req, res) => {
               { expiresIn: maxAge },
               { maxAge: maxAge, httpOnly: true }
             )
-          );
+            );
+                   
           res.status(200).json({
             userId: user.id,
-            isAdmin: user.isAdmin,
+            isAdmin: user.isAdmin,         
           }
-          );          
+          ); 
+        
         })
         .catch((err) => res.status(500).json({ err}));
     })

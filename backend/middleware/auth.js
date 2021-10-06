@@ -30,7 +30,6 @@ module.exports.checkUser = (req, res, next) => {
         res.cookie("jwt", "", { maxAge: 1 });
         next();
       } else {
-        
         res.locals.user = decodedToken.userId;
         console.log(res.locals.user);
         next();
