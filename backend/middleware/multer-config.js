@@ -8,11 +8,11 @@ const MIME_TYPES = {
   'image/png': 'png',
 };
 
-// Defining the type of storage
+ // Defining the type of storage
 
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
-    callback(null, 'images');
+    callback(null, '../frontend/public/uploads/profil');
   },
   filename: (req, file, callback) => {
 
@@ -24,4 +24,4 @@ const storage = multer.diskStorage({
   },
 });
 
-module.exports = multer({ storage: storage }).single('image');
+module.exports = multer({ storage: storage }).single('file');

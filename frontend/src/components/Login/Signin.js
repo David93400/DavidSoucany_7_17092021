@@ -14,19 +14,23 @@ const Signin = () => {
         e.preventDefault();
         
         axios
-          .post(`${process.env.REACT_APP_API_URL}auth/login`, { email, password }, { withCredentials: true })
+          .post(
+            `${process.env.REACT_APP_API_URL}auth/login`,
+            { email, password },
+            { withCredentials: true }
+          )
 
           .then((res) => {
             window.location = '/';
           })
           .catch((err) => {
             Swal.fire({
-              position: 'top',
               icon: 'error',
               text: 'Email ou Mot de passe incorect',
+              confirmButtonColor: 'red',
             });
             console.log(err);
-          });
+          });   
     }
 
 

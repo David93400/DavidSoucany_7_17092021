@@ -21,28 +21,30 @@ const Index = ( props ) => {
 
     return (
       <>
-        <ul className="mt-5 ms-5 pt-5 ps-5 col">
-          <Button
-            outline
-            color="secondary"
-            onClick={handleModals}
-            className="m-5"
-            id="register"
-          >
-            S'inscrire
-          </Button>
-          <Button
-            outline
-            color="secondary"
-            onClick={handleModals}
-            className="m-5"
-            id="login"
-          >
-            Se connecter
-          </Button>
-        </ul>
-        {signupModal && <Signup />}
-        {signinModal && <Signin />}
+        <div className="container">
+          <ul className="d-flex mt-5 pt-5 col">
+            <Button
+              outline
+              color="secondary"
+              onClick={handleModals}
+              className="m-5"
+              id="register"
+            >
+              S'inscrire
+            </Button>
+            <Button
+              outline
+              color="secondary"
+              onClick={handleModals}
+              className="m-5"
+              id="login"
+            >
+              Se connecter
+            </Button>
+          </ul>
+          {signupModal && <Signup />}
+          {signinModal && <Signin />}
+        </div>
       </>
     );
 };

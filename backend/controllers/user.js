@@ -36,17 +36,18 @@ exports.updateUser = (req, res) => {
         .then((user) => {
           if (req.file) {
             if (user.avatar !== null) {
-              const fileName = user.avatar.split(`/images/`)[1];
-              fs.unlink(`images/${fileName}`, (err) => {
-                if (err) console.log(err);
-                else {
-                  console.log(`Image supprimée: ` + fileName);
+              const fileName = user.avatar.split(`/profil/`)[1];
+              fs.unlink(
+                `../frontend/public/uploads/profil/${fileName}`,
+                (err) => {
+                  if (err) console.log(err);
+                  else {
+                    console.log(`Image supprimée: ` + fileName);
+                  }
                 }
-              });
+              );
             }
-            req.body.avatar = `${req.protocol}://${req.get('host')}/images/${
-              req.file.filename
-            }`;
+            req.body.avatar = `./uploads/profil/${req.file.filename}`;
           }
           delete req.body.isAdmin;
           delete req.body.password;

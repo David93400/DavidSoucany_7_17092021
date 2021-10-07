@@ -7,9 +7,8 @@ import '../styles/home.css'
 const Home = () => {
     return (
         <div>
-            <h1>HOME</h1>
-            <Header />
-            
+            <Header/>
+            <h1 className='m-5 p-5'>HOME</h1>            
         </div>
     );
 };
