@@ -60,12 +60,12 @@ const Header = () => {
               <NavbarBrand
                 className="d-inline-block p-0"
                 href="/"
-                style={{ width: 200 }}
+                style={{ width: 140 }}
               >
                 <img
                   src="./img/icon-left-font-monochrome-black.png"
                   alt="logo groupomania"
-                  className="position-relative img-fluid"
+                  className="img-fluid"
                 />
               </NavbarBrand>
             </Col>

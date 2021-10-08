@@ -11,7 +11,7 @@ const fs = require('fs');
 exports.getAllUsers = (req, res) => {
   User.findAll({ order: [[`pseudo`, `ASC`]] })
     .then((users) => {
-      res.status(200).json({ data: users });
+      res.status(200).json(users);
     })
     .catch((error) => res.status(400).json({ error }));
 

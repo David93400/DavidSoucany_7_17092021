@@ -9,29 +9,14 @@ const fs = require('fs');
 
 // View all posts
 
-exports.getAllPosts = (req, res, next) => {
-  Post.findAll({
-    // include: [
-    //   {
-    //     model: User,
-    //   },
-    //   {
-    //     model: Comment,
-    //     include: [
-    //       {
-    //         model: User,
-    //       },
-    //     ],
-    //   },
-    // ],
-    order: [['createdAt', 'DESC']],
-  })
-    .then((posts) => res.status(200).json(posts))
-    .catch((error) => {
-      console.log(error);
-      res.status(400).json({ error });
-    });
+exports.getAllPosts = (req, res) => {
+  Post.findAll({ order: [['createdAt', 'DESC']] })
+    .then((posts) => {
+      res.status(200).json(posts);
+    })
+    .catch((error) => res.status(400).json({ error }));
 };
+
 
 // View one post
 
@@ -54,9 +39,7 @@ exports.createPost = (req, res, next) => {
     userId: req.body.userId,
     title: req.body.title,
     content: req.body.content,
-    attachment: req.file
-      ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-      : null,
+    attachment: req.file ? `./uploads/posts/${req.file.filename}` : null,
     likes: 0,
     comments: 0,
   })
@@ -79,22 +62,23 @@ exports.updatePost = (req, res, next) => {
     .then((post) => {
         if (req.file) {
           if (post.attachment !== null) {
-            const fileName = post.image.split("/images/")[1];
-            fs.unlink(`images/${fileName}`, (err) => {
-              if (err) console.log(err);
-              else {
-                console.log("Image supprimée: " + fileName);
+            const fileName = post.image.split("/posts/")[1];
+            fs.unlink(
+              `../frontend/public/uploads/posts/${fileName}`,
+              (err) => {
+                if (err) console.log(err);
+                else {
+                  console.log('Image supprimée: ' + fileName);
+                }
               }
-            });
+            );
           }
-          req.body.image = `${req.protocol}://${req.get("host")}/images/${
-            req.file.filename
-          }`;
+          req.body.image = `./uploads/posts/${req.file.filename}`;
         }
         post
           .update({ ...req.body, id: req.params.id })
           .then(() =>
-            res.status(200).json({ message: "Votre a été modifié !" })
+            res.status(200).json({ message: "Votre post a été modifié !" })
           )
           .catch((error) => res.status(400).json({ error }));
       
@@ -113,11 +97,11 @@ exports.deletePost = (req, res, next) => {
     .then((post) => {
       
         if (post.attachment !== null) {
-          const fileName = post.image.split("/images/")[1];
-          fs.unlink(`images/${fileName}`, (err) => {
+          const fileName = post.image.split("/posts/")[1];
+          fs.unlink(`../frontend/public/uploads/posts/${fileName}`, (err) => {
             if (err) console.log(err);
             else {
-              console.log("Image supprimée: " + fileName);
+              console.log('Image supprimée: ' + fileName);
             }
           });
         }

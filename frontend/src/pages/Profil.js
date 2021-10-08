@@ -1,6 +1,5 @@
 
 import React, { useContext } from 'react';
-import Header from '../components/Header';
 import Login from '../components/Login/Index.js'
 import { UidContext } from '../components/AppContext';
 import UpdateProfil from '../components/Profil/UpdateProfil';

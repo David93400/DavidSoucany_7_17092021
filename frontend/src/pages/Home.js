@@ -1,14 +1,12 @@
 import React from 'react';
-import Header from '../components/Header';
+import Thread from '../components/Thread';
 import '../styles/home.css'
 
 
 
 const Home = () => {
     return (
-        <div>
-            <h1 className='m-5 p-5'>HOME</h1>            
-        </div>
+        <Thread/>
     );
 };
 

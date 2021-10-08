@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { FormGroup, Input, Label } from 'reactstrap';
 import { updateBio } from '../../actions/user.actions';
 import { dateParser } from '../Utils';
 import UploadImg from './UploadImg';

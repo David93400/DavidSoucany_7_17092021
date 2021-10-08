@@ -3,18 +3,21 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Provider} from 'react-redux';
-import {applyMiddleware, createStore} from 'redux';
+import { Provider } from 'react-redux';
+import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 
 // dev tools
-import {composeWithDevTools} from 'redux-devtools-extension';
-
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { getUsers } from './actions/users.actions';
 
 const store = createStore(
-  rootReducer, composeWithDevTools(applyMiddleware(thunk))
-)
+  rootReducer,
+  composeWithDevTools(applyMiddleware(thunk))
+);
+ 
+store.dispatch(getUsers());
 
 ReactDOM.render(
   <Provider store={store}>
@@ -22,5 +25,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
-
-
