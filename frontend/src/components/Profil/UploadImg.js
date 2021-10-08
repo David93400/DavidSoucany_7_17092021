@@ -23,7 +23,10 @@ const UploadImg = () => {
   return (
     <div className="mb-3">
       <form action="" onSubmit={handlePicture}>
-        <label htmlFor="file" className="form-label">
+        <label
+          htmlFor="file"
+          className="form-label mt-3 mb-3 fs-5 text-danger display-1"
+        >
           Changer d'image
         </label>
         <input

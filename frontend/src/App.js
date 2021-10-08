@@ -5,6 +5,7 @@ import { UidContext } from "./components/AppContext";
 import axios from "axios";
 import { getUser } from "./actions/user.actions";
 import { useDispatch } from 'react-redux';
+import Header from "./components/Header";
 
 
 
@@ -33,6 +34,7 @@ function App() {
 
   return (
     <UidContext.Provider value={uid}>
+      <Header/>
       <Routes />
     </UidContext.Provider>
   );

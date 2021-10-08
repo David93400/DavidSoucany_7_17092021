@@ -32,21 +32,26 @@ const Header = () => {
         style={{ height: 100 }}
       >
         <Container>
-          <Row noGutters className="position-relative w-100 align-items-center">
+          <Row
+            noGutters
+            className="w-100 align-items-center d-flex flex-nowrap"
+          >
             <Col className="d-flex justify-content-start">
               <Nav className="mrx-auto d-flex" navbar>
                 <NavItem className="d-flex align-items-center">
-                  <NavLink
-                    className="font-weight-bold d-flex justify-content-xs-start justify-content-lg-center"
-                    href="/profil"
-                  >
-                    <img
-                      src=""
-                      alt="avatar"
-                      className="img-fluid rounded-circle"
-                      style={{ width: 70 }}
-                    />
-                  </NavLink>
+                  {uid ? (
+                    <NavLink
+                      className="font-weight-bold d-flex justify-content-xs-start justify-content-lg-center"
+                      href="/profil"
+                    >
+                      <img
+                        src={userData.avatar}
+                        alt="avatar"
+                        className="img-fluid rounded-circle"
+                        style={{ width: 70 }}
+                      />
+                    </NavLink>
+                  ) : null}
                 </NavItem>
               </Nav>
             </Col>
@@ -59,7 +64,7 @@ const Header = () => {
               >
                 <img
                   src="./img/icon-left-font-monochrome-black.png"
-                  alt="logo"
+                  alt="logo groupomania"
                   className="position-relative img-fluid"
                 />
               </NavbarBrand>
@@ -70,7 +75,9 @@ const Header = () => {
                 <>
                   <NavItem className="d-flex align-items-center">
                     <NavLink className="font-weight-bold" href="/profil">
-                      <span className="me-3 ">Bienvenue {userData.pseudo}</span>
+                      <span className="me-3 text-danger">
+                        Bienvenue {userData.pseudo}
+                      </span>
                       <Logout />
                     </NavLink>
                   </NavItem>
@@ -79,7 +86,9 @@ const Header = () => {
                 <>
                   <NavItem className="d-flex align-items-center">
                     <NavLink className="font-weight-bold" href="/profil">
-                      <span className="me-3">Inscription / Connexion</span>
+                      <span className="me-3 text-danger">
+                        Inscription / Connexion
+                      </span>
                       <img
                         src="./img/login.png"
                         alt="login"

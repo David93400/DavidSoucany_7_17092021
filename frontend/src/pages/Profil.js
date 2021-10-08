@@ -12,7 +12,6 @@ const Profil = () => {
 
     return (
       <>
-        <Header />
         {uid ? (
           <UpdateProfil/>
         ) : (
@@ -21,13 +20,13 @@ const Profil = () => {
               <div className="col">
                 <Login signin={false} signup={true} />
               </div>
-              {/* <div className="col-sm-auto d-flex  pt-4"> */}
+
               <img
                 className="mt-5 ms-5 pt-5 w-50 img-fluid"
                 src="./img/icon-left-font.png"
                 alt="Logo"
               />
-              {/* </div> */}
+
             </div>
           </div>
         )}
