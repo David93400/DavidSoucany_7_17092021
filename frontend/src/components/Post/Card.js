@@ -1,18 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updatePost } from '../../actions/post.actions';
+import { UidContext } from '../AppContext';
 import { dateParser, isEmpty } from '../Utils';
 import './Card.css';
 import CardComments from './CardComments';
 import DeleteCard from './DeleteCard';
 
 const Card = ({ post }) => {
+  const uid = useContext(UidContext);
   const userData = useSelector((state) => state.userReducer);
   const usersData = useSelector((state) => state.usersReducer);
   const [isLoading, setIsLoading] = useState(true);
   const [isUpdated, setIsUpdated] = useState(false);
   const [textUpdated, setTextUpdated] = useState(null);
   const [titleUpdated, setTitleUpdated] = useState(null);
+  const [showComments, setShowComments] = useState(false);
   const dispatch = useDispatch();
 
   const updateItem = async () => {
@@ -108,9 +111,7 @@ const Card = ({ post }) => {
                   </div>
                 )}
 
-                <span
-                  className="d-flex justify-content-center"
-                >
+                <span className="d-flex justify-content-center">
                   {post.attachment && (
                     <img
                       src={post.attachment}
@@ -119,6 +120,7 @@ const Card = ({ post }) => {
                     />
                   )}
                 </span>
+
                 <div className="mt-2 ms-2 btn">
                   {(userData.id === post.userId || userData.isAdmin) && (
                     <div className="button-container mb-1 d-flex">
@@ -135,19 +137,30 @@ const Card = ({ post }) => {
                     </div>
                   )}
                 </div>
-                <p className="card-textpb-2 ">
-                  <small className="text-muted">
+
+                <p className="card-text ">
+                  <small className="text-muted ms-1">
                     Posté le {dateParser(post.createdAt)}
                   </small>
-                  <small className="ms-5 ps-5">Like Button</small>
+
+                  {uid ? (
+                    <>
+                      <small className="btn ms-5 ps-5">Like Button</small>
+                      <small
+                        onClick={() => setShowComments(!showComments)}
+                        className="btn ms-5 ps-5"
+                      >
+                        Commenter
+                      </small>
+                    </>
+                  ) : null}
                 </p>
               </div>
             </div>
           </div>
         </>
       )}
-      
-      <CardComments post={post}/>
+      {showComments && <CardComments post={post} />}
     </div>
   );
 };

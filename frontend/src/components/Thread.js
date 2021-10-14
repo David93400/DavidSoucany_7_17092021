@@ -16,7 +16,7 @@ const Thread = () => {
         setLoadPost(true);
       }
     }
-
+// infinite scroll
     useEffect(() => {
             if (loadPost){
                 dispatch(getPosts(count ));
