@@ -15,6 +15,7 @@ if (config.use_env_variable) {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
+
 fs
   .readdirSync(__dirname)
   .filter(file => {
@@ -33,5 +34,16 @@ Object.keys(db).forEach(modelName => {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+
+db.users = require('./users.js')(sequelize, Sequelize);
+db.messages = require('./posts.js')(sequelize, Sequelize);
+db.comments = require('./comments.js')(sequelize, Sequelize);
+
+db.comments.belongsTo(db.posts);
+db.comments.belongsTo(db.users);
+db.posts.hasMany(db.comments);
+db.posts.belongsTo(db.users);
+db.users.hasMany(db.posts);
+db.users.hasMany(db.comments);
 
 module.exports = db;

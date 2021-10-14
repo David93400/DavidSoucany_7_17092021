@@ -10,9 +10,10 @@ const MIME_TYPES = {
 
  // Defining the type of storage
 
+
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
-    callback(null, '../frontend/public/uploads/profil');
+    callback(null, '../frontend/public/uploads');
   },
   filename: (req, file, callback) => {
 

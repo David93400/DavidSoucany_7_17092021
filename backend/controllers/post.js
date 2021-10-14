@@ -32,16 +32,16 @@ exports.getOnePost = (req, res, next) => {
 exports.createPost = (req, res, next) => {
   if (!req.body.content && !req.body.title) {
     return res
-      .status(400)
+      .status(401)
       .json({ errormessage: 'Veuillez choisir un titre et un contenu' });
   }
   Post.create({
     userId: req.body.userId,
     title: req.body.title,
     content: req.body.content,
-    attachment: req.file ? `./uploads/posts/${req.file.filename}` : null,
+    attachment: req.file ? `./uploads/${req.file.filename}` : null,
     likes: 0,
-    comments: 0,
+    // comments: 0,
   })
     .then(() => res.status(201).json({ message: 'Post créé !' }))
     .catch((error) => {
@@ -62,9 +62,9 @@ exports.updatePost = (req, res, next) => {
     .then((post) => {
         if (req.file) {
           if (post.attachment !== null) {
-            const fileName = post.image.split("/posts/")[1];
+            const fileName = post.attachment.split("/uploads/")[1];
             fs.unlink(
-              `../frontend/public/uploads/posts/${fileName}`,
+              `../frontend/public/uploads/${fileName}`,
               (err) => {
                 if (err) console.log(err);
                 else {
@@ -73,19 +73,18 @@ exports.updatePost = (req, res, next) => {
               }
             );
           }
-          req.body.image = `./uploads/posts/${req.file.filename}`;
+          req.body.attachment = `./uploads/${req.file.filename}`;
         }
-        post
-          .update({ ...req.body, id: req.params.id })
+        Post.update({ ...req.body }, { where: { id: req.params.id } })
           .then(() =>
-            res.status(200).json({ message: "Votre post a été modifié !" })
+            res.status(200).json({ message: 'Votre post a été modifié !' })
           )
           .catch((error) => res.status(400).json({ error }));
       
-    })
+    }
+    )
     .catch((error) => res.status(500).json({ error }));
 };
-
 
 // Delete a post
 
@@ -97,8 +96,8 @@ exports.deletePost = (req, res, next) => {
     .then((post) => {
       
         if (post.attachment !== null) {
-          const fileName = post.image.split("/posts/")[1];
-          fs.unlink(`../frontend/public/uploads/posts/${fileName}`, (err) => {
+          const fileName = post.attachment.split("/uploads/")[1];
+          fs.unlink(`../frontend/public/uploads/${fileName}`, (err) => {
             if (err) console.log(err);
             else {
               console.log('Image supprimée: ' + fileName);

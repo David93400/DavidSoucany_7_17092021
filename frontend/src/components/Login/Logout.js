@@ -21,14 +21,14 @@ const Logout = () => {
     }
 
     return (
-      
+      <>
         <img
           src="./img/logout.png"
           alt="logout"
           style={{ width: 40 }}
           onClick={logout}
         />
-      
+      </>
     );
 };
 

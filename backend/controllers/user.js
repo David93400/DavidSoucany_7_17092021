@@ -36,9 +36,9 @@ exports.updateUser = (req, res) => {
         .then((user) => {
           if (req.file) {
             if (user.avatar !== null) {
-              const fileName = user.avatar.split(`/profil/`)[1];
+              const fileName = user.avatar.split(`/uploads/`)[1];
               fs.unlink(
-                `../frontend/public/uploads/profil/${fileName}`,
+                `../frontend/public/uploads/${fileName}`,
                 (err) => {
                   if (err) console.log(err);
                   else {
@@ -47,7 +47,7 @@ exports.updateUser = (req, res) => {
                 }
               );
             }
-            req.body.avatar = `./uploads/profil/${req.file.filename}`;
+            req.body.avatar = `./uploads/${req.file.filename}`;
           }
           delete req.body.isAdmin;
           delete req.body.password;
@@ -72,8 +72,8 @@ exports.deleteUser = (req, res) => {
     User.findOne({ where: { id: id } })
       .then((user) => {
         if (user.avatar !== null) {
-          const fileName = user.avatar.split('/images/')[1];
-          fs.unlink(`images/${fileName}`, (err) => {
+          const fileName = user.avatar.split('/uploads/')[1];
+          fs.unlink(`uploads/${fileName}`, (err) => {
             if (err) console.log(err);
             else {
               console.log(`Image supprimée: ` + fileName);

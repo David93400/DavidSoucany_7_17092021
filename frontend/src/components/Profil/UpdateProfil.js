@@ -76,7 +76,7 @@ const UpdateProfil = () => {
               Membre depuis le {dateParser(userData.createdAt)}
             </h3>
             <img
-              className="rounded mx-auto d-block w-75"
+              className="rounded mx-auto d-block w-50 mt-5"
               src="./img/icon.png"
               alt="logo groupomania"
             />

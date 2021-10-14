@@ -17,15 +17,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    content: {
+    comment: {
       type: DataTypes.STRING(1024),
       allowNull: false
     },
-    username: {
-      type: DataTypes.STRING(255),
-      allowNull: false
-    },
-    updateAt: {
+    createdAt: {
       type: DataTypes.DATE,
       allowNull: false
     }

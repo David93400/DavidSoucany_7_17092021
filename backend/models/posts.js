@@ -11,7 +11,7 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: false,
         primaryKey: true,
       },
-      posterId: {
+      userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
