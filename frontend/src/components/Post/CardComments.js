@@ -38,7 +38,7 @@ const CardComments = (post) => {
                 className="card mb-3 border-danger ms-4 me-4"
                 key={comment.id}
               >
-                <div className="d-flex align-items-center">
+                <div className="d-flex align-items-center flex-wrap">
                   <img
                     src={
                       !isEmpty(usersData[0]) &&
@@ -55,7 +55,7 @@ const CardComments = (post) => {
                   />
 
                   <div className="d-block">
-                    <p className="mt-3 fw-bold">
+                    <p className="mt-3 fw-bold ms-2">
                       {!isEmpty(usersData[0]) &&
                         usersData
                           .map((user) => {
@@ -64,7 +64,7 @@ const CardComments = (post) => {
                           })
                           .join('')}
                     </p>
-                    <p className="d-flex align-items-center border-bottom pb-3">
+                    <p className="d-flex align-items-center border-bottom pb-3 ms-2">
                       {comment.comment}
                     </p>
                     <EditDeleteComment comment={comment} postId={post.post.id}/>

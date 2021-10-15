@@ -98,8 +98,8 @@ const NewPost = () => {
                   onChange={(e) => setContent(e.target.value)}
                   value={content}
                 />
-                <span className="d-flex justify-content-between mt-3">
-                  <div>
+                <span className="d-flex flex-wrap justify-content-between mt-3">
+                  <div className="d-flex mb-2">
                     <img
                       className="img-fluid me-2"
                       style={{ width: 42 }}
@@ -119,7 +119,6 @@ const NewPost = () => {
                     {title || content || postAttachment ? (
                       <button
                         className="btn btn-block btn-danger"
-                        style={{ width: 150 }}
                         onClick={cancelPost}
                       >
                         Annuler

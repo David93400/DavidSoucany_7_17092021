@@ -18,13 +18,22 @@ const Card = ({ post }) => {
   const [showComments, setShowComments] = useState(false);
   const dispatch = useDispatch();
 
-  const updateItem = async () => {
-    if (textUpdated || titleUpdated) {
-      dispatch(updatePost(post.id, textUpdated, titleUpdated));
-    }
+   const updateItem = async () => {
 
-    setIsUpdated(false);
-  };
+    const content = post.content
+    const title = post.title
+    
+     if (titleUpdated) {
+       
+       dispatch(updatePost(post.id, content, titleUpdated));
+     }
+     if (textUpdated) {
+       
+       dispatch(updatePost(post.id, textUpdated, title));
+     }
+
+     setIsUpdated(false);
+   };
 
   useEffect(() => {
     !isEmpty(usersData[0]) && setIsLoading(false);
@@ -121,7 +130,7 @@ const Card = ({ post }) => {
                   )}
                 </span>
 
-                <div className="mt-2 ms-2 btn">
+                <div className="mt-2 ms-2 btn ">
                   {(userData.id === post.userId || userData.isAdmin) && (
                     <div className="button-container mb-1 d-flex">
                       <div onClick={() => setIsUpdated(!isUpdated)}>
@@ -138,19 +147,19 @@ const Card = ({ post }) => {
                   )}
                 </div>
 
-                <p className="card-text">
-                  <small className="text-muted ms-1">
+                <p className="card-text d-flex justify-content-xs-center align-items-center flex-wrap">
+                  <small className="text-muted ms-1 me-4">
                     Posté le {dateParser(post.createdAt)}
                   </small>
 
                   {uid ? (
                     <>
-                      <small className="btn ms-5 ps-5 fs-4">
+                      <small className="btn fs-4">
                         <i className="far fa-heart"></i>
                       </small>
                       <small
                         onClick={() => setShowComments(!showComments)}
-                        className="btn ms-5 ps-5"
+                        className="btn "
                       >
                         Commenter
                       </small>

@@ -15,21 +15,11 @@ const EditDeleteComment = (comment, postId) => {
   const handleEdit = (e) => {
     e.preventDefault();
 
-    
     if (text) {
-        //   console.log(comment.comment.id, text);
-        dispatch(editComment(comment.comment.id, text)).then(() =>
-          dispatch(getComments())
-          .then(() => setText(''), setEdit(false))
-
-        );
-      }
-
-    // if (text) {
-    //   dispatch(editComment(comment.comment.id, text));
-    //   setText('');
-    //   setEdit(false);
-    // }
+      dispatch(editComment(comment.comment.id, text)).then(() =>
+        dispatch(getComments()).then(() => setText(''), setEdit(false))
+      );
+    }
   };
 
   const handleDelete = () =>
@@ -61,14 +51,14 @@ const EditDeleteComment = (comment, postId) => {
       {isAuthor && edit && (
         <form action="" onSubmit={handleEdit}>
           <label
-            className="mb-2 btn border"
+            className="mb-2 btn border ms-2"
             htmlFor="text"
             onClick={() => setEdit(!edit)}
           >
             Éditer
           </label>
           <br />
-          <div className="d-flex align-items-center">
+          <div className="d-flex align-items-center flex-wrap">
             <span
               onClick={() => {
                 if (
@@ -85,7 +75,7 @@ const EditDeleteComment = (comment, postId) => {
                   src="./img/trash.png"
                   alt="delete-icon"
                   className="img-fluid"
-                  style={{ width: 50 }}
+                  style={{ width: 35 }}
                 />
               </div>
             </span>
@@ -94,13 +84,13 @@ const EditDeleteComment = (comment, postId) => {
               name="text"
               onChange={(e) => setText(e.target.value)}
               defaultValue={comment.comment.comment}
-              className="text-muted form-control ms-4 me-1"
+              className="text-muted form-control me-1 col"
               rows="1"
             />
             <input
-              className="btn btn-secondary btn-sm ms-2 mb-1"
+              className="btn btn-secondary ms-2 mb-1 me-2"
               type="submit"
-              value="Valider les modifications"
+              value="Modifier"
             />
           </div>
         </form>

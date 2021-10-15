@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
+import DeleteProfil from '../Post/DeleteProfil';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateBio } from '../../actions/user.actions';
 import { dateParser } from '../Utils';
 import UploadImg from './UploadImg';
+
+
 import './UpdateProfil.css';
+
 
 const UpdateProfil = () => {
   const [bio, setBio] = useState('');
@@ -15,6 +19,7 @@ const UpdateProfil = () => {
     dispatch(updateBio(userData.id, bio));
     setUpdateForm(false);
   }
+
 
   return (
     <div className="container mt-5 pt-5">
@@ -82,6 +87,7 @@ const UpdateProfil = () => {
             />
           </div>
         </div>
+        <DeleteProfil/>
       </div>
     </div>
   );
