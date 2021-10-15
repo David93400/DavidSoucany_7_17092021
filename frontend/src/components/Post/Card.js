@@ -138,14 +138,16 @@ const Card = ({ post }) => {
                   )}
                 </div>
 
-                <p className="card-text ">
+                <p className="card-text">
                   <small className="text-muted ms-1">
                     Posté le {dateParser(post.createdAt)}
                   </small>
 
                   {uid ? (
                     <>
-                      <small className="btn ms-5 ps-5">Like Button</small>
+                      <small className="btn ms-5 ps-5 fs-4">
+                        <i className="far fa-heart"></i>
+                      </small>
                       <small
                         onClick={() => setShowComments(!showComments)}
                         className="btn ms-5 ps-5"

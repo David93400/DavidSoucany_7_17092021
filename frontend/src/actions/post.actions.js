@@ -1,13 +1,15 @@
 import axios from 'axios';
 
-
 export const GET_POSTS = 'GET_POSTS';
 export const ADD_POST = 'ADD_POST';
 export const UPDATE_POST = 'UPDATE_POST';
-export const DELETE_POST = "DELETE_POST"
+export const DELETE_POST = 'DELETE_POST';
 
-export const GET_POST_ERRORS = 'GET_POST_ERRORS';
+// Comments
 
+export const ADD_COMMENT = 'ADD_COMMENT';
+export const EDIT_COMMENT = 'EDIT_COMMENT';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
 
 export const getPosts = (num) => {
   return (dispatch) => {
@@ -31,10 +33,9 @@ export const addPost = (data) => {
     return axios
       .post(`${process.env.REACT_APP_API_URL}posts/`, data)
       .then(console.log)
-      .catch(console.error)
+      .catch(console.error);
   };
 };
-
 
 export const updatePost = (postId, content, title) => {
   return (dispatch) => {
@@ -61,4 +62,39 @@ export const deletePost = (postId) => {
       })
       .catch((err) => console.log(err));
   };
-}
+};
+
+export const addComment = (data) => {
+  return (dispatch) => {
+    return axios({
+      method: 'post',
+      url: `${process.env.REACT_APP_API_URL}comments/`,
+      data,
+    })
+      .then(console.log)
+      .catch(console.error);
+  };
+};
+
+export const editComment = (commentId, comment) => {
+  return (dispatch) => {
+    return axios({
+      method: 'put',
+      url: `${process.env.REACT_APP_API_URL}comments/${commentId}`,
+      data:{ comment },
+    })
+      .then(console.log)
+      .catch(console.error);
+  };
+};
+
+export const deleteComment = (commentId) => {
+  return (dispatch) => {
+    return axios({
+      method: 'delete',
+      url: `${process.env.REACT_APP_API_URL}comments/${commentId}`
+    })
+      .then(console.log)
+      .catch(console.error);
+  };
+};

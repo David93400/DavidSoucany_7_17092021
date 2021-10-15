@@ -6,7 +6,7 @@ const Comment = db.comments;
 // get all comments
 
 exports.getAllComments = (req, res) => {
-  Comment.findAll({ order: [[`id`, `DESC`]] })
+  Comment.findAll({ order: [[`id`, `ASC`]] })
     .then((comments) => {
       res.status(200).json(comments);
     })

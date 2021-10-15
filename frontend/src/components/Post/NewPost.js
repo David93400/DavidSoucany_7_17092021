@@ -127,7 +127,6 @@ const NewPost = () => {
                     ) : null}
                     <button
                       className="btn btn-block btn-secondary ms-2"
-                      style={{ width: 150 }}
                       onClick={handlePost}
                     >
                       Publier
