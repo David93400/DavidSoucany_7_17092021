@@ -1,10 +1,9 @@
 import axios from 'axios';
-import cookie from 'js-cookie';
 
 export const GET_USER = 'GET_USER';
 export const UPLOAD_PICTURE = 'UPLOAD_PICTURE';
 export const UPDATE_BIO = 'UPDATE_BIO';
-export const DELETE_PROFIL = 'DELETE_PROFIL'
+export const DELETE_PROFIL = 'DELETE_PROFIL';
 
 export const getUser = (uid) => {
   return (dispatch) => {
@@ -46,5 +45,3 @@ export const updateBio = (id, bio) => {
       .catch((err) => console.log(err));
   };
 };
-
-

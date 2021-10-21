@@ -11,33 +11,67 @@ const Card = ({ post }) => {
   const uid = useContext(UidContext);
   const userData = useSelector((state) => state.userReducer);
   const usersData = useSelector((state) => state.usersReducer);
+  const commentsData = useSelector((state) => state.commentsReducer);
   const [isLoading, setIsLoading] = useState(true);
   const [isUpdated, setIsUpdated] = useState(false);
   const [textUpdated, setTextUpdated] = useState(null);
   const [titleUpdated, setTitleUpdated] = useState(null);
   const [showComments, setShowComments] = useState(false);
+
   const dispatch = useDispatch();
 
-   const updateItem = async () => {
+  const updateItem = async () => {
+    const content = post.content;
+    const title = post.title;
 
-    const content = post.content
-    const title = post.title
-    
-     if (titleUpdated) {
-       
-       dispatch(updatePost(post.id, content, titleUpdated));
-     }
-     if (textUpdated) {
-       
-       dispatch(updatePost(post.id, textUpdated, title));
-     }
+    if (titleUpdated) {
+      dispatch(
+        updatePost(
+          post.id,
+          content,
+          titleUpdated,
+          post.userId,
+          userData.isAdmin
+        )
+      );
+    }
+    if (textUpdated) {
+      dispatch(
+        updatePost(post.id, textUpdated, title, post.userId, userData.isAdmin)
+      );
+    }
+    if (textUpdated && titleUpdated) {
+      dispatch(
+        updatePost(
+          post.id,
+          textUpdated,
+          titleUpdated,
+          post.userId,
+          userData.isAdmin
+        )
+      );
+    }
 
-     setIsUpdated(false);
-   };
+    setIsUpdated(false);
+  };
 
   useEffect(() => {
     !isEmpty(usersData[0]) && setIsLoading(false);
   }, [usersData]);
+
+  const countComments = () => {
+    // console.log(post.id);
+    const result = commentsData.filter((comment) => comment.postId === post.id);
+
+    // console.log(result);
+    const count = result.length;
+    // console.log(count);
+    if (count <= 1) {
+      return count + ' Commentaire';
+    } else if (count > 1) {
+      return count + ' Commentaires';
+    }
+  };
 
   return (
     <div className="card-container" key={post.id}>
@@ -48,7 +82,7 @@ const Card = ({ post }) => {
           </div>
         </div>
       ) : (
-        <>
+        <div key={post.id}>
           <div className="mb-3">
             <div className="card">
               <div className="card-body ">
@@ -130,7 +164,7 @@ const Card = ({ post }) => {
                   )}
                 </span>
 
-                <div className="mt-2 ms-2 btn ">
+                <div className="mt-2 btn ">
                   {(userData.id === post.userId || userData.isAdmin) && (
                     <div className="button-container mb-1 d-flex">
                       <div onClick={() => setIsUpdated(!isUpdated)}>
@@ -147,19 +181,22 @@ const Card = ({ post }) => {
                   )}
                 </div>
 
-                <p className="card-text d-flex justify-content-xs-center align-items-center flex-wrap">
-                  <small className="text-muted ms-1 me-4">
+                <p className="card-text d-flex justify-content-center align-items-center flex-wrap">
+                  <small className="text-muted m-auto d-flex">
                     Posté le {dateParser(post.createdAt)}
                   </small>
-
                   {uid ? (
                     <>
-                      <small className="btn fs-4">
-                        <i className="far fa-heart"></i>
+                      <small
+                        onClick={() => setShowComments(!showComments)}
+                        className="btn border-bottom"
+                      >
+                        <i className="far fa-comment me-2"></i>
+                        {!isEmpty(commentsData[0]) && countComments()}
                       </small>
                       <small
                         onClick={() => setShowComments(!showComments)}
-                        className="btn "
+                        className="btn border-bottom"
                       >
                         Commenter
                       </small>
@@ -169,7 +206,7 @@ const Card = ({ post }) => {
               </div>
             </div>
           </div>
-        </>
+        </div>
       )}
       {showComments && <CardComments post={post} />}
     </div>

@@ -23,6 +23,7 @@ const Header = () => {
 
   return (
     <header>
+      
       <Navbar
         fixed="top"
         color="light"
@@ -34,7 +35,7 @@ const Header = () => {
         <Container>
           <Row
             noGutters
-            className="w-100 align-items-center d-flex flex-nowrap"
+            className="w-100 align-items-center justify-content-center d-flex flex-nowrap"
           >
             <Col className="d-flex justify-content-start">
               <Nav className="mrx-auto d-flex" navbar>
@@ -78,8 +79,10 @@ const Header = () => {
                       <span className="me-3 text-danger">
                         Bienvenue {userData.pseudo}
                       </span>
-                      <Logout />
                     </NavLink>
+                    <NavLink className="font-weight-bold" href="/">
+                      <Logout />
+                      </NavLink>
                   </NavItem>
                 </>
               ) : (

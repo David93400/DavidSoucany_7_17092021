@@ -22,12 +22,12 @@ const Index = ( props ) => {
     return (
       <>
         <div className="container">
-          <ul className="d-flex mt-5 pt-5 col">
+          <div className="d-flex justify-content-center mt-5">
             <Button
               outline
               color="secondary"
               onClick={handleModals}
-              className="m-5"
+              className="m-3"
               id="register"
             >
               S'inscrire
@@ -36,12 +36,12 @@ const Index = ( props ) => {
               outline
               color="secondary"
               onClick={handleModals}
-              className="m-5"
+              className="m-3"
               id="login"
             >
               Se connecter
             </Button>
-          </ul>
+          </div>
           {signupModal && <Signup />}
           {signinModal && <Signin />}
         </div>

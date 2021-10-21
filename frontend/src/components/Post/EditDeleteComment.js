@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getComments } from '../../actions/comments.actions';
 import { deleteComment, editComment } from '../../actions/post.actions';
 import { UidContext } from '../AppContext';
 
 const EditDeleteComment = (comment, postId) => {
+
+  const userData = useSelector((state) => state.userReducer);
   const [isAuthor, setIsAuthor] = useState(false);
   const [edit, setEdit] = useState(false);
   const [text, setText] = useState('');
@@ -16,25 +18,25 @@ const EditDeleteComment = (comment, postId) => {
     e.preventDefault();
 
     if (text) {
-      dispatch(editComment(comment.comment.id, text)).then(() =>
+      dispatch(editComment(comment.comment.id, text, userData.id, userData.isAdmin)).then(() =>
         dispatch(getComments()).then(() => setText(''), setEdit(false))
       );
     }
   };
 
   const handleDelete = () =>
-    dispatch(deleteComment(comment.comment.id)).then(() =>
-      dispatch(getComments())
-    );
+    dispatch(
+      deleteComment(comment.comment.id, userData.id, userData.isAdmin)
+    ).then(() => dispatch(getComments()));
 
   useEffect(() => {
     const checkAuthor = () => {
-      if (uid === comment.comment.userId) {
+      if (uid === comment.comment.userId || userData.isAdmin) {
         setIsAuthor(true);
       }
     };
     checkAuthor();
-  }, [uid, comment.comment.userId]);
+  }, [userData.isAdmin, uid, comment.comment.userId]);
 
   return (
     <div>
@@ -43,7 +45,7 @@ const EditDeleteComment = (comment, postId) => {
           <img
             src="./img/edit.png"
             alt="edit-comment-icon"
-            className="img-fluid rounded-circle"
+            className="img-fluid rounded-circle bg-light"
             style={{ width: 25 }}
           />
         </span>
@@ -51,7 +53,7 @@ const EditDeleteComment = (comment, postId) => {
       {isAuthor && edit && (
         <form action="" onSubmit={handleEdit}>
           <label
-            className="mb-2 btn border ms-2"
+            className="btn border ms-1"
             htmlFor="text"
             onClick={() => setEdit(!edit)}
           >
@@ -74,7 +76,7 @@ const EditDeleteComment = (comment, postId) => {
                 <img
                   src="./img/trash.png"
                   alt="delete-icon"
-                  className="img-fluid"
+                  className="img-fluid bg-light rounded-circle"
                   style={{ width: 35 }}
                 />
               </div>

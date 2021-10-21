@@ -4,6 +4,7 @@ import { getComments } from '../../actions/comments.actions';
 import { addComment } from '../../actions/post.actions';
 import { dateParser, isEmpty } from '../Utils';
 import EditDeleteComment from './EditDeleteComment';
+import './CardComments.css';
 
 const CardComments = (post) => {
   const [text, setText] = useState('');
@@ -25,7 +26,7 @@ const CardComments = (post) => {
         dispatch(getComments()).then(() => setText(''))
       );
     }
-  }; 
+  };
 
   return (
     <>
@@ -35,7 +36,12 @@ const CardComments = (post) => {
           if (comment.postId === post.post.id) {
             return (
               <div
-                className="card mb-3 border-danger ms-4 me-4"
+                className={
+                  userData.id === comment.userId
+                    ? 'mb-2 ms-4 me-4 user '
+                    : 'border-secondary card mb-2 ms-4 me-4'
+                }
+                // className="card mb-2 border-danger ms-4 me-4"
                 key={comment.id}
               >
                 <div className="d-flex align-items-center flex-wrap">
@@ -50,12 +56,12 @@ const CardComments = (post) => {
                         .join('')
                     }
                     className="m-3 img-fluid rounded-circle"
-                    style={{ width: 80 }}
+                    style={{ width: 40 }}
                     alt="commenter-pic"
                   />
 
                   <div className="d-block">
-                    <p className="mt-3 fw-bold ms-2">
+                    <p className="mt-1 fw-bold ms-3">
                       {!isEmpty(usersData[0]) &&
                         usersData
                           .map((user) => {
@@ -64,22 +70,25 @@ const CardComments = (post) => {
                           })
                           .join('')}
                     </p>
-                    <p className="d-flex align-items-center border-bottom pb-3 ms-2">
+                    <span className="d-flex align-items-center ms-3">
                       {comment.comment}
-                    </p>
-                    <EditDeleteComment comment={comment} postId={post.post.id}/>
+                    </span>
+                    <EditDeleteComment
+                      comment={comment}
+                      postId={post.post.id}
+                    />
                   </div>
                 </div>
-                <p className="text-muted ps-3 mt-2">
+                <span className="text-muted ps-3">
                   Le {dateParser(comment.createdAt)}
-                </p>
+                </span>
               </div>
             );
           }
           return null;
         })}
       {userData.id && (
-        <div className="container col-sm-6 pb-4">
+        <div className="container col-sm-6 pt-2">
           <form
             className="d-flex justify-content-center align-items-center"
             action=""
@@ -101,6 +110,7 @@ const CardComments = (post) => {
           </form>
         </div>
       )}
+      <div className="btn"></div>
     </>
   );
 };

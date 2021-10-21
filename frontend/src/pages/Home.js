@@ -13,7 +13,7 @@ const Home = () => {
 
     return (
         <>
-        <div className="home-header">
+        <div className="">
             {uid ? <NewPost/> : <Login signin={true} signup={false}/> }
         </div>
         <Thread/>

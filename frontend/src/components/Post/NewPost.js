@@ -8,7 +8,7 @@ import './NewPost.css';
 
 const Swal = require('sweetalert2');
 
-const NewPost = () => {
+const NewPost = (post) => {
   const [isLoading, setIsLoading] = useState(true);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -18,6 +18,9 @@ const NewPost = () => {
   const userData = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
+  // const commentsData = useSelector((state) => state.commentsReducer);
+  // const posts = useSelector((state) => state.postReducer);
+
   const handlePost = async () => {
     if (title && content) {
       const data = new FormData();
@@ -25,7 +28,7 @@ const NewPost = () => {
       data.append('title', title);
       data.append('content', content);
       if (file) data.append('file', file);
-      
+
       await dispatch(addPost(data));
       dispatch(getPosts());
       cancelPost();

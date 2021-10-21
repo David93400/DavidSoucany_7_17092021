@@ -24,11 +24,6 @@ export const getPosts = (num) => {
 };
 
 export const addPost = (data) => {
-  // const config = {
-  //   headers: {
-  //     'Content-Type': 'multipart/form-data',
-  //   },
-  // };
   return (dispatch) => {
     return axios
       .post(`${process.env.REACT_APP_API_URL}posts/`, data)
@@ -37,12 +32,14 @@ export const addPost = (data) => {
   };
 };
 
-export const updatePost = (postId, content, title) => {
+export const updatePost = (postId, content, title, userId, isAdmin) => {
+  
   return (dispatch) => {
     return axios({
       method: 'put',
       url: `${process.env.REACT_APP_API_URL}posts/${postId}`,
-      data: { content, title },
+      data: { content, title, userId, isAdmin },
+      withCredentials: true,
     })
       .then((res) => {
         dispatch({ type: UPDATE_POST, payload: { postId, content, title } });
@@ -51,11 +48,13 @@ export const updatePost = (postId, content, title) => {
   };
 };
 
-export const deletePost = (postId) => {
+export const deletePost = (postId, userId, isAdmin) => {
   return (dispatch) => {
     return axios({
       method: 'delete',
       url: `${process.env.REACT_APP_API_URL}posts/${postId}`,
+      data: {userId, isAdmin},
+      withCredentials: true,
     })
       .then((res) => {
         dispatch({ type: DELETE_POST, payload: { postId } });
@@ -76,23 +75,26 @@ export const addComment = (data) => {
   };
 };
 
-export const editComment = (commentId, comment) => {
+export const editComment = (commentId, comment, user, isAdmin) => {
   return (dispatch) => {
     return axios({
       method: 'put',
       url: `${process.env.REACT_APP_API_URL}comments/${commentId}`,
-      data:{ comment },
+      data: { comment, user, isAdmin },
+      withCredentials: true,
     })
       .then(console.log)
       .catch(console.error);
   };
 };
 
-export const deleteComment = (commentId) => {
+export const deleteComment = (commentId, user, isAdmin) => {
   return (dispatch) => {
     return axios({
       method: 'delete',
-      url: `${process.env.REACT_APP_API_URL}comments/${commentId}`
+      url: `${process.env.REACT_APP_API_URL}comments/${commentId}`,
+      data:{user, isAdmin},
+      withCredentials: true,
     })
       .then(console.log)
       .catch(console.error);
