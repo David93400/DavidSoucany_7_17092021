@@ -17,7 +17,7 @@ exports.getAllComments = (req, res) => {
 // get all comments by post
 
 exports.findAllComments = (req, res, next) => {
-  // const CommentsForOneMessage = {};
+
   Comment.findAll({
     where: {
       postId: req.params.id,

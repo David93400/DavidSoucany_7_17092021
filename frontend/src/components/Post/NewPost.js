@@ -18,8 +18,6 @@ const NewPost = (post) => {
   const userData = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
-  // const commentsData = useSelector((state) => state.commentsReducer);
-  // const posts = useSelector((state) => state.postReducer);
 
   const handlePost = async () => {
     if (title && content) {
@@ -59,7 +57,7 @@ const NewPost = (post) => {
   }, [userData]);
 
   return (
-    <div className="container mt-4 pt-5">
+    <div className="container pt-4">
       {isLoading ? (
         <div className="card mb-3" style={{ height: 100 }}>
           <div className="card-body text-center">
@@ -114,7 +112,7 @@ const NewPost = (post) => {
                       type="file"
                       id="file"
                       name="file"
-                      accept=".jpg, .jpeg, .png"
+                      accept=".jpg, .jpeg, .png, .gif"
                       onChange={(e) => handlePicture(e)}
                     />
                   </div>

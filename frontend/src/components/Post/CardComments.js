@@ -41,7 +41,6 @@ const CardComments = (post) => {
                     ? 'mb-2 ms-4 me-4 user '
                     : 'border-secondary card mb-2 ms-4 me-4'
                 }
-                // className="card mb-2 border-danger ms-4 me-4"
                 key={comment.id}
               >
                 <div className="d-flex align-items-center flex-wrap">
@@ -56,7 +55,7 @@ const CardComments = (post) => {
                         .join('')
                     }
                     className="m-3 img-fluid rounded-circle"
-                    style={{ width: 40 }}
+                    style={{ width: 45 }}
                     alt="commenter-pic"
                   />
 
@@ -70,7 +69,7 @@ const CardComments = (post) => {
                           })
                           .join('')}
                     </p>
-                    <span className="d-flex align-items-center ms-3">
+                    <span className="d-flex align-items-center ms-3 mb-1">
                       {comment.comment}
                     </span>
                     <EditDeleteComment

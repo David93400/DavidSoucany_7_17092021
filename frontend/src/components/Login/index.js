@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button } from 'reactstrap';
 import Signin from './Signin';
 import Signup from './Signup';
+import "./Index.css"
 
 const Index = ( props ) => {
 
@@ -21,22 +22,22 @@ const Index = ( props ) => {
 
     return (
       <>
-        <div className="container">
-          <div className="d-flex justify-content-center mt-5">
+        <div className="container col-11 bg-groupomania">
+          <div className="d-flex justify-content-center mt-5 pt-3">
             <Button
               outline
-              color="secondary"
+              color="black"
               onClick={handleModals}
-              className="m-3"
+              className="m-3 bg-light"
               id="register"
             >
               S'inscrire
             </Button>
             <Button
               outline
-              color="secondary"
+              color="black"
               onClick={handleModals}
-              className="m-3"
+              className="m-3 bg-light"
               id="login"
             >
               Se connecter

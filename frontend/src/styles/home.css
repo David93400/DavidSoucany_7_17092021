@@ -1,0 +1,14 @@
+.main-title {
+    border-radius: 5px;
+  height: 200px;
+  background-color: white;
+  background-image: url('../components/style-img/icon.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-size: 260px;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 1.5px #152745;
+}

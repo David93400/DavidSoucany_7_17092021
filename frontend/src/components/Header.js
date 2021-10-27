@@ -14,6 +14,7 @@ import React, { useContext } from 'react';
 import { UidContext } from './AppContext';
 import Logout from './Login/Logout';
 import {useSelector} from 'react-redux';
+import "../styles/header.css"
 
 
 const Header = () => {
@@ -23,13 +24,12 @@ const Header = () => {
 
   return (
     <header>
-      
       <Navbar
         fixed="top"
         color="light"
         light
         expand="xs"
-        className="border-bottom border-gray bg-white"
+        className="border-bottom border-gray bg-white bg-header"
         style={{ height: 100 }}
       >
         <Container>
@@ -49,7 +49,7 @@ const Header = () => {
                         src={userData.avatar}
                         alt="avatar"
                         className="img-fluid rounded-circle"
-                        style={{ width: 70 }}
+                        style={({ height: 70 })}
                       />
                     </NavLink>
                   ) : null}
@@ -76,26 +76,30 @@ const Header = () => {
                 <>
                   <NavItem className="d-flex align-items-center">
                     <NavLink className="font-weight-bold" href="/profil">
-                      <span className="me-3 text-danger">
+                      <span className="me-3" style={{ color: '#D2515A' }}>
                         Bienvenue {userData.pseudo}
                       </span>
                     </NavLink>
                     <NavLink className="font-weight-bold" href="/">
                       <Logout />
-                      </NavLink>
+                    </NavLink>
                   </NavItem>
                 </>
               ) : (
                 <>
-                  <NavItem className="d-flex align-items-center">
-                    <NavLink className="font-weight-bold" href="/profil">
-                      <span className="me-3 text-danger">
+                  <NavItem className="d-flex align-items-center flex-nowrap">
+                    <NavLink
+                      className="font-weight-bold d-flex align-items-center"
+                      href="/profil"
+                    >
+                      <span className="me-3 text-danger d-flex align-items-center">
                         Inscription / Connexion
                       </span>
                       <img
+                        className="img-fluid"
                         src="./img/login.png"
                         alt="login"
-                        style={{ width: 40 }}
+                        style={{ height: 30 }}
                       />
                     </NavLink>
                   </NavItem>

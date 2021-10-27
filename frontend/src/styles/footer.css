@@ -1,0 +1,16 @@
+.bg-footer {
+  height: 100px;
+  margin-bottom: -25px;
+  padding-right: 50px;
+  background-color: rgba(21, 39, 69, 0.9);
+  background-image: url('../components/style-img/footer-logo.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-size: 200px;
+  background-position-x: 95% ;
+  background-position-y: center ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 1px #152745;
+}

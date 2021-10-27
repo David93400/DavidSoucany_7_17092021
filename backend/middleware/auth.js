@@ -3,18 +3,16 @@ const db = require('../models');
 const User = db.users;
 
 module.exports.admin = (req, res, next) => {
+  
   try {
     const token = req.cookies.jwt;
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_TOKEN);
     const userId = decodedToken.userId;
     const isAdmin = decodedToken.isAdmin;
-    console.log(userId);
-    console.log(req.body.userId);
-    console.log(isAdmin);
-    console.log(req.body.isAdmin);
-    if (req.body.isAdmin === isAdmin) {
+ 
+    if (req.body.isAdmin == isAdmin) {
       next();
-    } else if (req.body.userId === userId) {
+    } else if (req.body.userId == userId) {
       next();
     } else {
       throw '403: unauthorized request wrong cookie';
@@ -22,7 +20,7 @@ module.exports.admin = (req, res, next) => {
 
     
   } catch {
-    res.status(402).json({ message: `Authentification error (JWT Cookie) !` });
+    res.status(401).json({ message: `Authentification error (JWT Cookie) !` });
   }
 };
 

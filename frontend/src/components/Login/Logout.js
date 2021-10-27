@@ -23,7 +23,7 @@ const Logout = () => {
       <img
         src="./img/logout.png"
         alt="logout"
-        style={{ width: 40 }}
+        style={{ height: 30 }}
         onClick={logout}
       />
     </>

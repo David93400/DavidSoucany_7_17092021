@@ -8,13 +8,11 @@ const { Sequelize } = require('sequelize');
 require('dotenv').config();
 const { checkUser, requireAuth } = require('./middleware/auth');
 
-
-
-
 // Lancement de Express
 
 const app = express();
 app.use(cookieParser());
+
 
 // Configuration CORS
 
@@ -44,9 +42,11 @@ app.use(
 );
 
 // parse requests of content-type - application/json
+
 app.use(express.json({ origin: true, credentials: true }));
 
 // parse requests of content-type - application/x-www-form-urlencoded
+
 app.use(express.urlencoded({ extended: true }))
 
 // Connect to DB
@@ -69,13 +69,10 @@ try {
     console.error('Impossible de se connecter, erreur suivante :', error);
 }
 
-
-
 // appel des models dans la DB
 
 const db = require("./models");
 db.sequelize.sync();
-
 
 // Import des routes
 
@@ -97,9 +94,6 @@ app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 app.use('/posts', postRoutes);
 app.use('/comments', commentRoutes);
-
-
-
-// 
+ 
 
 module.exports = app;

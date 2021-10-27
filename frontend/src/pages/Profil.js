@@ -12,20 +12,20 @@ const Profil = () => {
     return (
       <>
         {uid ? (
-          <UpdateProfil/>
+          <UpdateProfil />
         ) : (
-          <div className="container">
+          <div className="container mt-5 pt-5">
+            <h1 className="text-center d-none">Login</h1>
             <div className="row">
               <div className="col">
                 <Login signin={false} signup={true} />
               </div>
 
               <img
-                className="mt-5 ms-5 pt-5 w-50 img-fluid"
-                src="./img/icon-left-font.png"
-                alt="Logo"
+                className="img-fluid col w-50 ps-5"
+                src="./img/icon-left-font-monochrome-black.png"
+                alt="Logo-groupomania"
               />
-
             </div>
           </div>
         )}

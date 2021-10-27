@@ -5,7 +5,6 @@ import { deleteComment, editComment } from '../../actions/post.actions';
 import { UidContext } from '../AppContext';
 
 const EditDeleteComment = (comment, postId) => {
-
   const userData = useSelector((state) => state.userReducer);
   const [isAuthor, setIsAuthor] = useState(false);
   const [edit, setEdit] = useState(false);
@@ -18,7 +17,9 @@ const EditDeleteComment = (comment, postId) => {
     e.preventDefault();
 
     if (text) {
-      dispatch(editComment(comment.comment.id, text, userData.id, userData.isAdmin)).then(() =>
+      dispatch(
+        editComment(comment.comment.id, text, userData.id, userData.isAdmin)
+      ).then(() =>
         dispatch(getComments()).then(() => setText(''), setEdit(false))
       );
     }
@@ -52,13 +53,14 @@ const EditDeleteComment = (comment, postId) => {
       )}
       {isAuthor && edit && (
         <form action="" onSubmit={handleEdit}>
-          <label
-            className="btn border ms-1"
-            htmlFor="text"
-            onClick={() => setEdit(!edit)}
-          >
-            Éditer
-          </label>
+          <span className="btn" onClick={() => setEdit(!edit)}>
+            <img
+              src="./img/edit.png"
+              alt="edit-comment-icon"
+              className="img-fluid rounded-circle bg-light"
+              style={{ width: 25 }}
+            />
+          </span>
           <br />
           <div className="d-flex align-items-center flex-wrap">
             <span

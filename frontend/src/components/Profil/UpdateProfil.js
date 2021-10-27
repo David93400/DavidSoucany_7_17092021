@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import DeleteProfil from '../Post/DeleteProfil';
+import DeleteProfil from './DeleteProfil';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateBio } from '../../actions/user.actions';
 import { dateParser } from '../Utils';
@@ -16,7 +16,7 @@ const UpdateProfil = () => {
   const dispatch = useDispatch();
 
   const handleUpdate = () => {
-    dispatch(updateBio(userData.id, bio));
+    dispatch(updateBio(userData.id, bio, userData.id, userData.isAdmin));
     setUpdateForm(false);
   }
 
@@ -25,13 +25,13 @@ const UpdateProfil = () => {
     <div className="container mt-5 pt-5">
       <div className="row">
         <div className="col d-flex align-items-center justify-content-center m-3 p-3">
-          <h1 className="fs-2 display-1">Profil de {userData.pseudo}</h1>
+          <h1 className="title-profil">Profil de {userData.pseudo}</h1>
         </div>
       </div>
 
       <div className="row mt-3 d-flex justify-content-around">
         <div className="col-sm-4 profil">
-          <h2 className="fs-4 pt-3 pb-3 ps-2 display-1">Photo de profil</h2>
+          <h2 className="fs-4 pt-2 ps-2 display-1">Photo de profil</h2>
           <img src={userData.avatar} alt="user-pic" className="img-fluid" />
           <UploadImg />
         </div>

@@ -2,8 +2,6 @@ const http = require('http');
 const app = require('./app');
 require('dotenv').config();
 
-
-
 const cors = require('cors');
 const { path } = require('./app');
 app.use(cors());

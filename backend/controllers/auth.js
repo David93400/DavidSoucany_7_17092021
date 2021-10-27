@@ -8,6 +8,8 @@ const User = models.users;
 
 const maxAge = 3 * 24 * 60 * 60 * 1000;
 
+// signup
+
 exports.signup = (req, res) => {
   bcrypt
     .hash(req.body.password, 10)
@@ -35,6 +37,8 @@ exports.signup = (req, res) => {
     })
     .catch((error) => res.status(500).json({ error }));
 };
+
+// log in
 
 exports.login = (req, res) => {
   const email = req.body.email;
@@ -70,6 +74,9 @@ exports.login = (req, res) => {
     })
     .catch((err) => res.status(500).json({ err }));
 };
+
+
+// log out
 
 module.exports.logout = (req, res) => {
   res.clearCookie('jwt');

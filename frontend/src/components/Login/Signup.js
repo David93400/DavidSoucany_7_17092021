@@ -95,112 +95,113 @@ const Signup = () => {
         } = formik;
 
       return (
+        <form action="" onSubmit={handleSubmit} className="ms-4 col">
+          <div className="form-group m-4">
+            <label htmlFor="pseudo" className="mb-1">
+              Pseudo
+            </label>
+            <input
+              type="text"
+              name="pseudo"
+              id="pseudo"
+              value={values.pseudo}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={
+                errors.pseudo && touched.pseudo
+                  ? 'border-danger form-control'
+                  : 'form-control'
+              }
+              placeholder="Pseudo"
+            />
+            {errors.pseudo && touched.pseudo && (
+              <span className="error text-danger">{errors.pseudo}</span>
+            )}
+          </div>
 
-            <form
-              action=""
-              onSubmit={(handleSubmit)}
-              className="ms-4 col"
-            >
-              <div className="form-group m-4">
-                <label htmlFor="pseudo" className="mb-1">
-                  Pseudo
-                </label>
-                <input
-                  type="text"
-                  name="pseudo"
-                  id="pseudo"
-                  value={values.pseudo}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className={
-                    errors.pseudo && touched.pseudo
-                      ? 'border-danger form-control'
-                      : 'form-control'
-                  }
-                  placeholder="Pseudo"
-                />
-                {errors.pseudo && touched.pseudo && (
-                  <span className="error text-danger">{errors.pseudo}</span>
-                )}
-              </div>
+          <div className="form-group m-4">
+            <label htmlFor="email" className="mb-1">
+              Adresse Email
+            </label>
+            <input
+              type="text"
+              name="email"
+              id="email"
+              value={values.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={
+                errors.email && touched.email
+                  ? 'border-danger form-control'
+                  : 'form-control'
+              }
+              placeholder="Votre Email"
+            />
+            {errors.email && touched.email && (
+              <span className="error text-danger">{errors.email}</span>
+            )}
+          </div>
 
-              <div className="form-group m-4">
-                <label className="mb-1">Adresse Email</label>
-                <input
-                  type="text"
-                  name="email"
-                  id="email"
-                  value={values.email}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className={
-                    errors.email && touched.email
-                      ? 'border-danger form-control'
-                      : 'form-control'
-                  }
-                  placeholder="Votre Email"
-                />
-                {errors.email && touched.email && (
-                  <span className="error text-danger">{errors.email}</span>
-                )}
-              </div>
+          <div className="form-group m-4">
+            <label htmlFor="password" className="mb-1">
+              Mot de passe
+            </label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              value={values.password}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={
+                errors.password && touched.password
+                  ? 'border-danger form-control'
+                  : 'form-control'
+              }
+              placeholder="Mot de passe"
+            />
+            {errors.password && touched.password && (
+              <span className="error text-danger">{errors.password}</span>
+            )}
+          </div>
 
-              <div className="form-group m-4">
-                <label className="mb-1">Mot de passe</label>
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  value={values.password}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className={
-                    errors.password && touched.password
-                      ? 'border-danger form-control'
-                      : 'form-control'
-                  }
-                  placeholder="Mot de passe"
-                />
-                {errors.password && touched.password && (
-                  <span className="error text-danger">{errors.password}</span>
-                )}
-              </div>
+          <div className="form-group m-4">
+            <label htmlFor="controlPassword" className="mb-1">
+              Confirmer mot de passe
+            </label>
+            <input
+              type="password"
+              name="controlPassword"
+              id="controlPassword"
+              className={
+                errors.controlPassword && touched.controlPassword
+                  ? 'border-danger form-control'
+                  : 'form-control'
+              }
+              placeholder="Vérifier votre Mot de passe"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.controlPassword}
+            />
+            {errors.controlPassword && touched.controlPassword && (
+              <span className="error text-danger">
+                {errors.controlPassword}
+              </span>
+            )}
+          </div>
 
-              <div className="form-group m-4">
-                <label className="mb-1">Confirmer mot de passe</label>
-                <input
-                  type="password"
-                  name="controlPassword"
-                  id="controlPassword"
-                  className={
-                    errors.controlPassword && touched.controlPassword
-                      ? 'border-danger form-control'
-                      : 'form-control'
-                  }
-                  placeholder="Vérifier votre Mot de passe"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.controlPassword}
-                />
-                {errors.controlPassword && touched.controlPassword && (
-                  <span className="error text-danger">
-                    {errors.controlPassword}
-                  </span>
-                )}
-              </div>
-
-              <button
-                type="submit"
-                className={
-                  !(dirty && isValid)
-                    ? 'btn-danger btn ms-4'
-                    : 'btn-success btn ms-4'
-                }
-                disabled={!(dirty && isValid)}
-              >
-                S'inscrire
-              </button>
-            </form>
+          <button
+            type="submit"
+            className={
+              !(dirty && isValid)
+                ? 'btn-danger btn ms-4 mb-4'
+                : 'btn-success btn ms-4 mb-4'
+            }
+            disabled={!(dirty && isValid)}
+          >
+            S'inscrire
+          </button>
+        </form>
       );
     }
   }

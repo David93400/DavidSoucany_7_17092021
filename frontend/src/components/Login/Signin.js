@@ -62,7 +62,7 @@ const Signin = () => {
           />
           <div className="password error"></div>
         </div>
-        <button type="submit" className="btn btn-secondary btn-block mx-4">
+        <button type="submit" className="btn btn-secondary btn-block mx-4 mb-4">
           Se connecter
         </button>
       </form>

@@ -17,9 +17,17 @@ export const getUser = (uid) => {
 };
 
 export const uploadPicture = (data, id) => {
+  // for (var value of data.values()) {
+  //   console.log(value);
+  // }
   return (dispatch) => {
-    return axios
-      .post(`${process.env.REACT_APP_API_URL}users/${id}`, data)
+    return axios({
+      method: 'put',
+      url: `${process.env.REACT_APP_API_URL}users/${id}`,
+      data: data,
+      withCredentials: true,
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
       .then((res) => {
         return axios
           .get(`${process.env.REACT_APP_API_URL}users/${id}`)
@@ -32,12 +40,14 @@ export const uploadPicture = (data, id) => {
   };
 };
 
-export const updateBio = (id, bio) => {
+export const updateBio = (id, bio, userId, isAdmin) => {
+  
   return (dispatch) => {
     return axios({
-      method: 'post',
+      method: 'put',
       url: `${process.env.REACT_APP_API_URL}users/` + id,
-      data: { bio },
+      data: { bio, userId, isAdmin },
+      withCredentials: true,
     })
       .then((res) => {
         dispatch({ type: UPDATE_BIO, payload: bio });

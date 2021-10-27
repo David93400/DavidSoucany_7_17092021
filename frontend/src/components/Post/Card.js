@@ -85,8 +85,8 @@ const Card = ({ post }) => {
         <div key={post.id}>
           <div className="mb-3">
             <div className="card">
-              <div className="card-body ">
-                <div className="mb-3 mt-3 d-flex d-row">
+              <div className="card-body card-post ">
+                <div className=" d-flex d-row p-4 bg-user">
                   <div>
                     <img
                       src={
@@ -100,11 +100,11 @@ const Card = ({ post }) => {
                       }
                       className=" d-block mx-auto rounded-circle border"
                       style={{ width: 70 }}
-                      alt="poster-pic"
+                      alt={`${post.userId + post.id}`}
                     />
                   </div>
                   <div>
-                    <p className="d-flex pt-3 fs-4 ps-3 display-5">
+                    <h2 className="d-flex pt-3 fs-4 ps-3 display-5">
                       {!isEmpty(usersData[0]) &&
                         usersData
                           .map((user) => {
@@ -112,14 +112,14 @@ const Card = ({ post }) => {
                             else return null;
                           })
                           .join('')}
-                    </p>
+                    </h2>
                   </div>
                 </div>
 
                 {isUpdated === false && (
-                  <h5 className="card-title pt-3 fs-4 display-4 border-bottom">
+                  <h2 className="card-title pt-3 fs-4 display-4 border-bottom">
                     {post.title}
-                  </h5>
+                  </h2>
                 )}
                 {isUpdated && (
                   <div className="update-post">
@@ -159,7 +159,7 @@ const Card = ({ post }) => {
                     <img
                       src={post.attachment}
                       className="m-3 img-fluid"
-                      alt="post-pic"
+                      alt={post.userId}
                     />
                   )}
                 </span>
@@ -181,12 +181,12 @@ const Card = ({ post }) => {
                   )}
                 </div>
 
-                <p className="card-text d-flex justify-content-center align-items-center flex-wrap">
+                <span className="card-text d-flex justify-content-center align-items-center flex-wrap">
                   <small className="text-muted m-auto d-flex">
                     Posté le {dateParser(post.createdAt)}
                   </small>
                   {uid ? (
-                    <>
+                    <div className="pt-1">
                       <small
                         onClick={() => setShowComments(!showComments)}
                         className="btn border-bottom"
@@ -200,9 +200,13 @@ const Card = ({ post }) => {
                       >
                         Commenter
                       </small>
-                    </>
-                  ) : null}
-                </p>
+                    </div>
+                  ) : (
+                    <a className="btn border-bottom" href="/profil">
+                      Vous devez être connecté pour commenter
+                    </a>
+                  )}
+                </span>
               </div>
             </div>
           </div>

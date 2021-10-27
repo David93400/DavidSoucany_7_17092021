@@ -12,12 +12,13 @@ const Home = () => {
 
 
     return (
-        <>
-        <div className="">
-            {uid ? <NewPost/> : <Login signin={true} signup={false}/> }
-        </div>
-        <Thread/>
-        </>
+      <>
+        <h1 className="text-center mt-5 fw-bold col-9 container main-title" style={{ color: '#0A1F43' }}>
+          Bienvenue sur le réseau Social de Groupomania
+        </h1>
+        <div>{uid ? <NewPost /> : <Login signin={true} signup={false} />}</div>
+        <Thread />
+      </>
     );
 };
 
