@@ -15,14 +15,12 @@ app.use(cookieParser());
 
 
 // Configuration CORS
-
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization'
   );
-  
   res.setHeader(
     'Access-Control-Allow-Methods',
     'GET, POST, PUT, DELETE, PATCH, OPTIONS'
@@ -50,7 +48,6 @@ app.use(express.json({ origin: true, credentials: true }));
 app.use(express.urlencoded({ extended: true }))
 
 // Connect to DB
-
 const sequelize = new Sequelize(
   `${process.env.DB_NAME}`,
   `${process.env.DB_USER}`,
@@ -75,21 +72,18 @@ const db = require("./models");
 db.sequelize.sync();
 
 // Import des routes
-
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user')
 const postRoutes = require('./routes/post');
 const commentRoutes = require ('./routes/comment');
 
 // Jwt
-
 app.get('*', checkUser);
 app.get('/jwtid', requireAuth, (req, res) => {
   res.status(200).json(res.locals.user);
 });
 
 // Routeurs
-
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 app.use('/posts', postRoutes);

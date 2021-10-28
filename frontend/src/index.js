@@ -22,7 +22,6 @@ const store = createStore(
 store.dispatch(getUsers());
 store.dispatch(getComments());
 
-
 ReactDOM.render(
   <Provider store={store}>
     <App />,

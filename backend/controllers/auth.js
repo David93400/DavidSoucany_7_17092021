@@ -9,7 +9,6 @@ const User = models.users;
 const maxAge = 3 * 24 * 60 * 60 * 1000;
 
 // signup
-
 exports.signup = (req, res) => {
   bcrypt
     .hash(req.body.password, 10)
@@ -21,25 +20,20 @@ exports.signup = (req, res) => {
         password: hash,
       })
         .then(() =>
-          res
-            .status(201)
-            .json({
-              message: `Enregistrement réussi ! Vous pouvez désormais vous connecter !`,
-            })
+          res.status(201).json({
+            message: `Enregistrement réussi ! Vous pouvez désormais vous connecter !`,
+          })
         )
         .catch(() =>
-          res
-            .status(400)
-            .json({
-              message: `Un compte avec ce pseudo et/ou cet email existe déjà`,
-            })
+          res.status(400).json({
+            message: `Un compte avec ce pseudo et/ou cet email existe déjà`,
+          })
         );
     })
     .catch((error) => res.status(500).json({ error }));
 };
 
-// log in
-
+// Log in
 exports.login = (req, res) => {
   const email = req.body.email;
   User.findOne({
@@ -62,9 +56,8 @@ exports.login = (req, res) => {
               process.env.JWT_SECRET_TOKEN,
               { expiresIn: maxAge },
               { maxAge: maxAge, httpOnly: true }
-            ),
+            )
           );
-
           res.status(200).json({
             userId: user.id,
             isAdmin: user.isAdmin,
@@ -75,9 +68,7 @@ exports.login = (req, res) => {
     .catch((err) => res.status(500).json({ err }));
 };
 
-
 // log out
-
 module.exports.logout = (req, res) => {
   res.clearCookie('jwt');
   res.redirect('/');

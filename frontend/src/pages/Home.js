@@ -9,8 +9,6 @@ import Login from '../components/Login/Index.js';
 
 const Home = () => {
     const uid = useContext(UidContext)
-
-
     return (
       <>
         <h1 className="text-center mt-5 fw-bold col-9 container main-title" style={{ color: '#0A1F43' }}>

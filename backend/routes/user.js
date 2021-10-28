@@ -6,7 +6,6 @@ const auth = require('../middleware/auth');
 const userCtrl = require('../controllers/user');
 
 // Users routes
-
 router.get('/', userCtrl.getAllUsers);
 router.get('/:id', userCtrl.getOneUser);
 router.put('/:id', multer,auth.admin, userCtrl.updateUser);
