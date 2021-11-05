@@ -18,7 +18,6 @@ const NewPost = (post) => {
   const userData = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
-
   const handlePost = async () => {
     if (title && content) {
       const data = new FormData();
@@ -81,6 +80,9 @@ const NewPost = (post) => {
                   />
                 </NavLink>
                 <div className="mb-3 mt-3 d-flex d-row"></div>
+                <label for="title" class="sr-only">
+                  Titre
+                </label>
                 <textarea
                   name="title"
                   id="title"
@@ -90,6 +92,9 @@ const NewPost = (post) => {
                   onChange={(e) => setTitle(e.target.value)}
                   value={title}
                 />
+                <label for="content" class="sr-only">
+                  Contenu
+                </label>
                 <textarea
                   name="content"
                   id="content"
@@ -107,6 +112,9 @@ const NewPost = (post) => {
                       src="./img/picture.png"
                       alt="pic-icon"
                     />
+                    <label for="file" class="sr-only">
+                      Fichier
+                    </label>
                     <input
                       className="form-control-sm"
                       type="file"

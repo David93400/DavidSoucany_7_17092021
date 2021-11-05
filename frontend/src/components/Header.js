@@ -76,7 +76,7 @@ const Header = () => {
                 <>
                   <NavItem className="d-flex align-items-center">
                     <NavLink className="font-weight-bold" href="/profil">
-                      <span className="me-3" style={{ color: '#D2515A' }}>
+                      <span className="me-3" style={{ color: '#D152745' }}>
                         Bienvenue {userData.pseudo}
                       </span>
                     </NavLink>
